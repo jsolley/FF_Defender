@@ -11,7 +11,7 @@ def PrintTeam():
         print("vikings schedule is: -\n")
         soup = BeautifulSoup(resp.text, 'html.parser')
         file = open("teams.txt", "a")
-        for item in soup.find_all('p', class_=["nfl-o-matchup-cards__team-full-name", ""]):
+        for item in soup.find_all('p', class_=["nfl-o-matchup-cards__team-short-name", ""]):
             teams = item.text.rstrip()
             file.write(teams)
             print(teams)
