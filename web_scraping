@@ -1,9 +1,21 @@
-import Requests
+import requests
+from bs4 import BeautifulSoup
 
-this
-is my
-first commit
+def PrintTeam():
 
-first commit why is this not working
+    url = "https://www.vikings.com/schedule/"
+    resp = requests.get(url)
 
-come on
+    if resp.status_code == 200:
+        print("Successfully opened the web page")
+        print("vikings schedule is: -\n")
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        file = open("teams.txt", "a")
+        for item in soup.find_all('p', class_=["nfl-o-matchup-cards__team-full-name", ""]):
+            teams = item.text.rstrip()
+            file.write(teams)
+            print(teams)
+        file.close()  # to change file access modes
+
+PrintTeam()
+
